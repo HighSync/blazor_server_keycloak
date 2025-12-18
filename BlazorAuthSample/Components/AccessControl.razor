@@ -5,7 +5,13 @@
         <a href="logout">Log out (@context.User.Identity.Name)</a>
     </Authorized>
     <NotAuthorized>
-        <a href="login?redirectUri=@Uri.EscapeDataString(Navigation.BaseUri)">Log in</a>
+        
+        @* TODO: прочитать 
+        Вариант 1 - Автоматический редирект на авторизацию *@
+        <label>Log in</label>
+        <RedirectToLogin></RedirectToLogin>
+        @* Вариант 2 - Ручной редирект на авторизацию *@
+        @* <a href="login?redirectUri=@Uri.EscapeDataString(Navigation.BaseUri)">Log in</a> *@
     </NotAuthorized>
 </AuthorizeView>
 
