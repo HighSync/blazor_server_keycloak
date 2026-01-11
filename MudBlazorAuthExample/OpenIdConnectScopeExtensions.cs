@@ -11,6 +11,7 @@ public static class OpenIdConnectScopeExtensions
         scope.Add("openid");
         scope.Add("profile");
         scope.Add("email");
+        scope.Add("roles");
     }
 
     //Configure custom OIDC scopes
@@ -53,10 +54,10 @@ public static class OpenIdConnectConfigurationExtensions
         #else        
         options.RequireHttpsMetadata = true;
         #endif
-        options.ReturnUrlParameter = "/";
         // options.PushedAuthorizationBehavior = PushedAuthorizationBehavior.Disable;
         options.ResponseType = OpenIdConnectResponseType.Code;
         options.ConfigureConnection();
+        options.GetClaimsFromUserInfoEndpoint = true;
         options.Scope.UseCustomScope();
 
         options.Events = new OpenIdConnectEvents()

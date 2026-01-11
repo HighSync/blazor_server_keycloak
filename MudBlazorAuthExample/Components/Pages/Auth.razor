@@ -1,0 +1,11 @@
+@using Microsoft.AspNetCore.Components.Authorization
+
+<AuthorizeView>
+    <Authorized>
+        <MudAlert Severity="Severity.Info">@context.User.Identity!.Name</MudAlert>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    
+}
