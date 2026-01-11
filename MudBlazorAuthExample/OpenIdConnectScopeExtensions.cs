@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+
+namespace MudBlazorAuthExample;
 
 public static class OpenIdConnectScopeExtensions
 {
@@ -34,48 +35,12 @@ public static class OpenIdConnectScopeExtensions
 //     Environment
 // }
 
-
-
-public static class OpenIdConnectConfigurationExtensions
-{
-    private static void ConfigureConnection(this OpenIdConnectOptions options)
-    {
-        options.Authority = "http://localhost:8085/realms/codeheap";
-        options.ClientId = "blazor-client";
-        options.CallbackPath = "/signin-oidc"; 
-        options.ClientSecret = "RImGOWdZz3HsNih8rvxGVZYvCj4DSOkW";
-    }
-    
-    public static void Configure(this OpenIdConnectOptions options)
-    {
-        //require https when built as not dev
-        #if DEBUG
-        options.RequireHttpsMetadata = false;
-        #else        
-        options.RequireHttpsMetadata = true;
-        #endif
-        // options.PushedAuthorizationBehavior = PushedAuthorizationBehavior.Disable;
-        options.ResponseType = OpenIdConnectResponseType.Code;
-        options.ConfigureConnection();
-        options.GetClaimsFromUserInfoEndpoint = true;
-        options.Scope.UseCustomScope();
-
-        options.Events = new OpenIdConnectEvents()
-        {
-            OnUserInformationReceived = context =>
-            {
-                //Add identity information mapping
-                context.Map();
-                return Task.CompletedTask;
-            }
-        };
-    }
-}
-
-
 public static class KeycloakIdentityMapper
 {
-    //map keycloak data to user identity information mapping
+    /// <summary>
+    /// Map keycloak data to user identity information
+    /// </summary>
+    /// <param name="context"></param>
     public static void Map(this UserInformationReceivedContext context)
     {
         if (context.Principal.Identity is not ClaimsIdentity claimsIdentity) return;
@@ -105,4 +70,3 @@ public static class KeycloakIdentityMapper
         }
     }
 }
-

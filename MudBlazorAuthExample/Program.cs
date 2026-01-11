@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using MudBlazor.Services;
+using MudBlazorAuthExample;
 using MudBlazorAuthExample.Components;
 
 var builder = WebApplication.CreateBuilder(args);
